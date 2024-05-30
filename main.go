@@ -16,14 +16,22 @@ func main() {
 
 	parts := strings.Split(expression, " ")
 
-	if len(parts) != 3 {
-		fmt.Println("Неверный формат выражения. Попробуйте еще раз.")
+	if len(parts) < 3 {
+		fmt.Println("Ошибка! Неверный формат выражения. Попробуйте еще раз.")
 		return
 	}
 
-	op1 := strings.Trim(parts[0], "\"")
-	operator := parts[1]
-	op2 := strings.Trim(parts[2], "\"")
+	var op1, operator, op2 string
+
+	if len(parts) > 3 {
+		op1 = strings.Trim(parts[0], "\"") + " " + strings.Trim(parts[1], "\"")
+		operator = parts[2]
+		op2 = strings.Trim(parts[3], "\"")
+	} else {
+		op1 = strings.Trim(parts[0], "\"")
+		operator = parts[1]
+		op2 = strings.Trim(parts[2], "\"")
+	}
 
 	switch operator {
 	case "+":
@@ -53,6 +61,6 @@ func main() {
 		}
 		fmt.Printf("Результат: %q", result)
 	default:
-		fmt.Println("Неправильный оператор. Попробуйте еще раз.")
+		fmt.Println("Ошибка! Неправильный оператор. Попробуйте еще раз.")
 	}
 }
